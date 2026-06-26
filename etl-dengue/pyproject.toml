@@ -1,0 +1,18 @@
+[project]
+name = "etl-dengue"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "vini-bgs",email = "viniciustheros@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+]
+
+[tool.poetry]
+packages = [{include = "etl_dengue", from = "src"}]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
