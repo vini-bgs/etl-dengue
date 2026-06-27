@@ -25,7 +25,7 @@ def get_engine():
     return create_engine(conn_str, fast_executemany=True)
 
 
-def load_df(df: pd.DataFrame, engine) -> None:
+def load_df_bronze(df: pd.DataFrame, engine) -> None:
     """
     Carrega o DataFrame na camada bronze do SQL Server
     """
@@ -47,4 +47,4 @@ if __name__ == "__main__":
     path = [Path("files/DENGBR20.csv")]
     df = csvs_for_df(path)
     engine = get_engine()
-    load_df(df, engine)
+    load_df_bronze(df, engine)
