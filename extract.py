@@ -1,13 +1,12 @@
 import pandas as pd
 
-# import os
-# import glob
+
 from tqdm import tqdm
 from pathlib import Path
 from loguru import logger
 
 
-def lista_de_arquivos(pasta: Path) -> list:
+def list_files(pasta: Path) -> list:
     """
     Recebe uma pasta e retorna uma lista com o nome
      de todos os arquivos .csv daquela pasta
@@ -26,19 +25,19 @@ def lista_de_arquivos(pasta: Path) -> list:
     return lista_arquivos
 
 
-def csv_for_df(arquivos: list) -> pd.DataFrame:
+def csvs_for_df(arquivos: list) -> pd.DataFrame:
     """
     Lê os arquivos .csv de uma pasta e armazena em uma variável
     """
     lista_df = list()
-    count = 1
+    # count = 1
     # qtde_arquivos = len(arquivos)
     for arquivo in tqdm(arquivos):
         df_temp = pd.read_csv(arquivo, dtype=str, encoding="utf-8")
         df_temp["origem"] = arquivo.name
         lista_df.append(df_temp)
         # logger.info(f"⏳ {count}/{qtde_arquivos} arquivos carregados...")
-        count += 1
+        # count += 1
 
     df = pd.concat(lista_df, ignore_index=True)
     tamanho_df = len(df)
@@ -50,8 +49,8 @@ def csv_for_df(arquivos: list) -> pd.DataFrame:
 if __name__ == "__main__":
     try:
         pasta = Path("files")
-        arquivos = lista_de_arquivos(pasta)
-        df = csv_for_df(arquivos)
+        arquivos = list_files(pasta)
+        df = csvs_for_df(arquivos)
         print(df)
     except FileNotFoundError as err:
         print(err)
